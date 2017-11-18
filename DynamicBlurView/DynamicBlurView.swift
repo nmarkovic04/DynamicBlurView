@@ -13,20 +13,20 @@ open class DynamicBlurView: UIView {
         return BlurLayer.self
     }
 
-    private var staticImage: UIImage?
-    private var displayLink: CADisplayLink?
-    private var blurLayer: BlurLayer {
+    fileprivate var staticImage: UIImage?
+    fileprivate var displayLink: CADisplayLink?
+    fileprivate var blurLayer: BlurLayer {
         return layer as! BlurLayer
     }
-    private let mainQueue = DispatchQueue.main
-    private let globalQueue: DispatchQueue = {
+    fileprivate let mainQueue = DispatchQueue.main
+    fileprivate let globalQueue: DispatchQueue = {
         if #available (iOS 8.0, *) {
             return .global(qos: .userInteractive)
         } else {
             return .global(priority: .high)
         }
     }()
-    private var renderingTarget: UIView? {
+    fileprivate var renderingTarget: UIView? {
         if isDeepRendering {
             return window
         } else {
@@ -160,7 +160,7 @@ extension DynamicBlurView {
 }
 
 extension DynamicBlurView {
-    private func linkForDisplay() {
+    fileprivate func linkForDisplay() {
         displayLink?.invalidate()
         displayLink = UIScreen.main.displayLink(withTarget: self, selector: #selector(DynamicBlurView.displayDidRefresh(_:)))
         displayLink?.add(to: .main, forMode: RunLoopMode(rawValue: trackingMode.description))
