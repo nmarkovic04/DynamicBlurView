@@ -19,12 +19,12 @@ private extension CGRect {
 }
 
 class BlurLayer: CALayer {
-    private static let blurRadiusKey = "blurRadius"
-    private static let blurLayoutKey = "blurLayout"
+    fileprivate static let blurRadiusKey = "blurRadius"
+    fileprivate static let blurLayoutKey = "blurLayout"
     @NSManaged var blurRadius: CGFloat
     @NSManaged private var blurLayout: CGFloat
 
-    private var fromBlurRadius: CGFloat?
+    fileprivate var fromBlurRadius: CGFloat?
     var presentationRadius: CGFloat {
         if let radius = fromBlurRadius {
             if let layer = presentation() {
@@ -97,7 +97,7 @@ extension BlurLayer {
         }
     }
 
-    private func hideOverlappingLayers(_ layers: [CALayer]?) -> [CALayer] {
+    fileprivate func hideOverlappingLayers(_ layers: [CALayer]?) -> [CALayer] {
         var hiddenLayers: [CALayer] = []
         guard let layers = layers else {
             return hiddenLayers
@@ -118,7 +118,7 @@ extension BlurLayer {
         return hiddenLayers
     }
 
-    private func isHang(to target: CALayer) -> Bool {
+    fileprivate func isHang(to target: CALayer) -> Bool {
         var layer = superlayer
         while layer != nil {
             if layer == target {
