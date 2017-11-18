@@ -22,7 +22,7 @@ class BlurLayer: CALayer {
     fileprivate static let blurRadiusKey = "blurRadius"
     fileprivate static let blurLayoutKey = "blurLayout"
     @NSManaged var blurRadius: CGFloat
-    @NSManaged private var blurLayout: CGFloat
+    @NSManaged fileprivate var blurLayout: CGFloat
 
     fileprivate var fromBlurRadius: CGFloat?
     var presentationRadius: CGFloat {

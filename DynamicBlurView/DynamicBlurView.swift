@@ -98,7 +98,7 @@ open class DynamicBlurView: UIView {
         }
     }
 
-    private func async(on queue: DispatchQueue, actions: @escaping () -> Void) {
+    fileprivate func async(on queue: DispatchQueue, actions: @escaping () -> Void) {
         if drawsAsynchronously {
             queue.async(execute: actions)
         } else {
@@ -106,7 +106,7 @@ open class DynamicBlurView: UIView {
         }
     }
 
-    private func sync(on queue: DispatchQueue, actions: () -> Void) {
+    fileprivate func sync(on queue: DispatchQueue, actions: () -> Void) {
         if drawsAsynchronously {
             queue.sync(execute: actions)
         } else {
@@ -114,7 +114,7 @@ open class DynamicBlurView: UIView {
         }
     }
 
-    private func draw(_ image: UIImage, blurRadius radius: CGFloat, fixes isFixes: Bool, baseLayer: CALayer?) {
+    fileprivate func draw(_ image: UIImage, blurRadius radius: CGFloat, fixes isFixes: Bool, baseLayer: CALayer?) {
         async(on: globalQueue) { [weak self] in
             if let me = self, let blurredImage = image.blurred(radius: radius, iterations: me.iterations, ratio: me.blurRatio, blendColor: me.blendColor, blendMode: me.blendMode) {
                 me.sync(on: me.mainQueue) {
@@ -124,7 +124,7 @@ open class DynamicBlurView: UIView {
         }
     }
 
-    private func blurLayerRect(to layer: CALayer, conversion: Bool) -> CGRect {
+    fileprivate func blurLayerRect(to layer: CALayer, conversion: Bool) -> CGRect {
         if conversion {
             let presentationLayer = blurLayer.presentation() ?? blurLayer
             return presentationLayer.convert(presentationLayer.bounds, to: layer)
@@ -133,7 +133,7 @@ open class DynamicBlurView: UIView {
         }
     }
 
-    private func snapshotImage(for layer: CALayer, conversion: Bool) -> UIImage? {
+    fileprivate func snapshotImage(for layer: CALayer, conversion: Bool) -> UIImage? {
         let rect = blurLayerRect(to: layer, conversion: conversion)
         guard let context = CGContext.imageContext(with: quality, rect: rect, opaque: isOpaque) else {
             return nil
